@@ -11,14 +11,14 @@ import java.sql.SQLException;
  */
 public class Conexion {
     public Connection conectar(){
-        Connection c = null;
+        Connection cone = null;
         try{
-           c = DriverManager.getConnection("jdbc:mysql://localhost:3306/tecnostore_db", "root", "123456789");
+           cone = DriverManager.getConnection("jdbc:mysql://localhost:3306/tecnostore_db", "root", "123456789");
             System.out.println("Conexion exitosa");
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return c;
+        return cone;
     }
 
 }

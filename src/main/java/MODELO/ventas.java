@@ -1,6 +1,5 @@
 
 package MODELO;
-
 /**
  *
  * @author ANGEL

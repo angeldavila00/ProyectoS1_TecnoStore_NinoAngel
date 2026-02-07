@@ -13,7 +13,9 @@ import CONTROLADOR.Conexion;
 public class AplicacionTecnoStore {
 
     public static void main(String[] args) {
-        Conexion co = new Conexion();
-        co.conectar();
+        Conexion cone = new Conexion();
+        cone.conectar();
+        
+        
     }
 }

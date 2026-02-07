@@ -1,11 +1,13 @@
 
 package MODELO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ANGEL
  */
-public class celulares {
+public class celulares implements Serializable {
     private int id , stock;
     private String modelo, sistema_operativo, gama;
     private double precio;
@@ -80,6 +82,17 @@ public class celulares {
     public void setId_marca(marcas id_marca) {
         this.id_marca = id_marca;
     }
+    @Override
+    public String toString() {
+        return """
+               *****************************
+               Id:          %s
+               Nombre:      %s
+               Sistema Operativo:         %s
+               Gama:       %s
+               """.formatted(id,id_marca.getNombre(),sistema_operativo,gama);
+    }
+
     
     
 }

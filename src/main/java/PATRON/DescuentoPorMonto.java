@@ -1,7 +1,7 @@
 
 package PATRON;
 
-import MODELO.celulares;
+import MODELO.Celulares;
 import java.util.List;
 
 /**
@@ -11,7 +11,7 @@ import java.util.List;
 public class DescuentoPorMonto implements StrategyDescuento{
 
     @Override
-    public double aplicar(double subtotal, List<celulares> listaCelulares) {
+    public double aplicar(double subtotal, List<Celulares> listaCelulares) {
         if(subtotal >= 3000000){
             return subtotal *0.90;
         }

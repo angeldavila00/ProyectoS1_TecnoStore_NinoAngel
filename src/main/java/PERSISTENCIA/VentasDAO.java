@@ -1,8 +1,8 @@
 
-package CONTROLADOR;
+package PERSISTENCIA;
 
+import CONTROLADOR.GestionarVentas;
 import MODELO.ventas;
-import PERSISTENCIA.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author ANGEL
  */
-public class GestionarVentasImpl implements GestionarVentas{
+public class VentasDAO implements GestionarVentas{
         Conexion cone = new Conexion();
         
     @Override

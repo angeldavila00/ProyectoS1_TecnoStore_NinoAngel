@@ -9,11 +9,12 @@ import java.io.Serializable;
  */
 public class celulares implements Serializable {
     private int id , stock;
-    private String modelo, sistema_operativo, gama;
+    private String modelo, sistema_operativo;
+    private Tipogama gama;
     private double precio;
     private marcas id_marca;
 
-    public celulares(int id, int stock, String modelo, String sistema_operativo, String gama, double precio, marcas id_marca) {
+    public celulares(int id, int stock, String modelo, String sistema_operativo, Tipogama gama, double precio, marcas id_marca) {
         this.id = id;
         this.stock = stock;
         this.modelo = modelo;
@@ -22,6 +23,8 @@ public class celulares implements Serializable {
         this.precio = precio;
         this.id_marca = id_marca;
     }
+
+    
     
     public celulares(){
         
@@ -59,13 +62,14 @@ public class celulares implements Serializable {
         this.sistema_operativo = sistema_operativo;
     }
 
-    public String getGama() {
+    public Tipogama getGama() {
         return gama;
     }
 
-    public void setGama(String gama) {
+    public void setGama(Tipogama gama) {
         this.gama = gama;
     }
+
 
     public double getPrecio() {
         return precio;

@@ -1,5 +1,5 @@
 
-package CONTROLADOR;
+package PERSISTENCIA;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

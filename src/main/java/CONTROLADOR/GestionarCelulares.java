@@ -1,16 +1,8 @@
 package CONTROLADOR;
 
+import MODELO.Tipogama;
 import MODELO.celulares;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import javax.swing.JFileChooser;
 
 /**
  *
@@ -19,101 +11,86 @@ import javax.swing.JFileChooser;
 public class GestionarCelulares {
 
     private ArrayList<celulares> celularesList = new ArrayList<>();
-    private final String ARCHIVO = "celulares.dat";
     
-    //Cargar
-    //Permanencia de datos
-    public void cargar(){
-        File f = new File(ARCHIVO);
-        if(!f.exists()){
-            return;
-        }
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARCHIVO))){
-            celularesList =(ArrayList<celulares>) ois.readObject();
-        
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-    }
+  //Uso de Stream Api
     
-    //Guardar
-    public void guardar(){
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO))){
-            oos.writeObject(celularesList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    //constructor 
-    public GestionarCelulares(){
-        cargar();
-    }
-    
-    //Administrar Lista
+    //Registro si cumple y si el id swe repite genera error
     public void registrar(celulares c){
+        boolean existen = celularesList.stream().anyMatch(x -> x.getId() == c.getId());
+        if(existen){
+            System.out.println("El id del dispositivo a registrar ya existe..."+c.getId());
+            return;       
+        }
         celularesList.add(c);
+        System.out.println("Celular Registrado con exito!");
+        
     }
     
-    //Listar 
+    //Listar celulares si existen
     public void listar(){
         if(celularesList.isEmpty()){
-            System.out.println("No hay celulares...");
+            System.out.println("No existen celulares registrados");
             return;
         }
-        for(celulares c: celularesList){
-            System.out.println(c);
-            
-        }
+        celularesList.forEach(System.out::println);
     }
     
-    //Buscar
-    
-    public void buscar(String nombre){
-        for(celulares c: celularesList){
-            if(c.getId_marca().getNombre().equalsIgnoreCase(nombre)){
-                System.out.println(c);
-                
-            }
-            
-        }
-        
+    //Buscar celular por ID se filtra por el id cel celular y si no existe retorna null.
+    public celulares buscar(int id){
+        return celularesList.stream()
+                .filter(c -> c.getId()== id)
+                .findFirst()
+                .orElse(null);
     }
+    
+    //Eliminar celular se busca por el ID, si no existe retorna null.
     
     public void eliminar(int id){
-        boolean eliminado = celularesList.removeIf(c -> c.getId() == id);
-        
-        if(eliminado){
-            guardar();
-            System.out.println("Celular eliminado...");
-        }else{
-            System.out.println("NO EXISTE EL CELULAR CON ESE "+id);
-        }  
-    }
-    
-    //Backup
-    public void exportarBackup(){
-        JFileChooser j = new JFileChooser();
-        j.setDialogTitle("Escoja la ruta a guardar");
-        int op =j.showSaveDialog(j); //Guardar dialogo
-        if(op==JFileChooser.APPROVE_OPTION){
-            File destino = j.getSelectedFile();
-            try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(destino))){
-                oos.writeObject(celularesList);
-                System.out.println("Base de datos exportada correctamente");
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+        boolean elimina = celularesList.removeIf(c -> c.getId() == id);
+        if(elimina){
+            System.out.println("Celular Eliminado....");
+        }else {
+            System.out.println("El celular que busca eliminar no existe..");
         }
+    }
+    
+    //Buscar por ID y actualiza informacion, si no existe cancela el proceso.
+    
+    public void actualizar(celulares c){
+        celulares existencia = buscar(c.getId());
+        if (existencia == null){
+            System.out.println("No se puede actualizar la informacion, no existen celulares con ese ID..");
+            return;
+        }
+        existencia.setModelo(c.getModelo());
+        existencia.setPrecio(c.getPrecio());
+        existencia.setSistema_operativo(c.getSistema_operativo());
+        existencia.setGama(c.getGama());
+        existencia.setStock(c.getStock());
+        System.out.println("Celular actualizado..");
+           
+        }
+    
+    //Busca el celular por el id si el celular no existe no se descuenta el stock, si no hay stock suficiente se cancela y deja stock igual y si existe stock se descuenta 
+    public boolean quitarStock(int idCelular,int cantidad){
+        celulares c = buscar(idCelular);
+        
+        if(c == null){
+            return false;
+        }
+        if(cantidad <=0){
+            return false;
+        }
+        if(c.getStock()< cantidad){
+            return false;
+        }
+        c.setStock(c.getStock()- cantidad);
+        return true;
         
     }
     
-    
-    
-    
+}
     
     
     
 
-}

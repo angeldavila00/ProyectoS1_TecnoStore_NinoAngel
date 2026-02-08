@@ -4,8 +4,8 @@
 
 package ar.angel.aplicaciontecnostore;
 
-import CONTROLADOR.Conexion;
-import CONTROLADOR.GestionarCelulares;
+import PERSISTENCIA.Conexion;
+
 
 /**
  *
@@ -16,9 +16,9 @@ public class AplicacionTecnoStore {
     public static void main(String[] args) {
         Conexion cone = new Conexion();
         cone.conectar();
-        GestionarCelulares ges = new GestionarCelulares();
         
-        ges.listar();
+        
+        
         
     }
 }

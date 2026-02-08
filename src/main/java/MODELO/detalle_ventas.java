@@ -34,6 +34,9 @@ public class detalle_ventas {
     }
 
     public void setCantidad(int cantidad) {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("Cantidad inválida");
+        }
         this.cantidad = cantidad;
     }
 
@@ -60,4 +63,10 @@ public class detalle_ventas {
     public void setId_venta(ventas id_venta) {
         this.id_venta = id_venta;
     }
+    
+    public void calcularSubtotal() {
+    if (id_celular == null) throw new IllegalStateException("Celular requerido");
+    this.subtotal = id_celular.getPrecio() * this.cantidad;
+}
+
 }

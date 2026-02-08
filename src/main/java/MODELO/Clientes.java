@@ -5,11 +5,12 @@ package MODELO;
  *
  * @author ANGEL
  */
-public class Personas {
-    private int id;
-    private String nombre, identificacion, correo, telefono;
+public class Clientes {
 
-    public Personas(int id, String nombre, String identificacion, String correo, String telefono) {
+    private int id;
+    private String nombre,  identificacion, correo,  telefono;
+
+    public Clientes(int id, String nombre, String identificacion, String correo, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.identificacion = identificacion;
@@ -56,5 +57,16 @@ public class Personas {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
+    
+    @Override
+    public String toString() {
+        return """
+               *****************************
+               Id:          %s
+               Nombre:      %s
+               Identificacion: %s
+               Correo:         %s
+               Telefono:       %s
+               """.formatted(getId(),getNombre(),getIdentificacion(),getCorreo(),getTelefono());
+    }
 }

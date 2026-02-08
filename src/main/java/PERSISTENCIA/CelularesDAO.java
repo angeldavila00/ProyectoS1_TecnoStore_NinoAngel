@@ -1,44 +1,29 @@
-
 package PERSISTENCIA;
 
-import CONTROLADOR.GestionarCelulares;
+
 import MODELO.Celulares;
 import java.util.ArrayList;
 
-public class CelularesDAO implements GestionarCelulares{
- Conexion cone = new Conexion();
+/**
+ *
+ * @author ANGEL
+ */
+public interface CelularesDAO {
 
-    @Override
-    public void guardar(Celulares c) {
-        
-    }
+    void guardar(Celulares celu);
 
-    @Override
-    public void actualizar(Celulares c, int id) {
-        
-    }
+    void actualizar(Celulares celu, int id);
 
-    @Override
-    public void eliminar(int id) {
-        
-    }
+    void eliminar(int id);
 
-    @Override
-    public ArrayList<Celulares> listar() {
-        
-     return null;
-        
-    }
+    ArrayList<Celulares> listar();
 
-    @Override
-    public Celulares buscar(int id) {
-       
-     return null;
-       
-    }
-
-    
-
-   
+    Celulares buscar(int id);
 
 }
+    
+
+    
+    
+    
+

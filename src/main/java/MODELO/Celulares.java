@@ -7,14 +7,14 @@ import java.io.Serializable;
  *
  * @author ANGEL
  */
-public class celulares implements Serializable {
+public class Celulares implements Serializable {
     private int id , stock;
     private String modelo, sistema_operativo;
     private Tipogama gama;
     private double precio;
-    private marcas id_marca;
+    private Marcas id_marca;
 
-    public celulares(int id, int stock, String modelo, String sistema_operativo, Tipogama gama, double precio, marcas id_marca) {
+    public Celulares(int id, int stock, String modelo, String sistema_operativo, Tipogama gama, double precio, Marcas id_marca) {
         this.id = id;
         this.stock = stock;
         this.modelo = modelo;
@@ -26,7 +26,7 @@ public class celulares implements Serializable {
 
     
     
-    public celulares(){
+    public Celulares(){
         
     }
 
@@ -79,11 +79,11 @@ public class celulares implements Serializable {
         this.precio = precio;
     }
 
-    public marcas getId_marca() {
+    public Marcas getId_marca() {
         return id_marca;
     }
 
-    public void setId_marca(marcas id_marca) {
+    public void setId_marca(Marcas id_marca) {
         this.id_marca = id_marca;
     }
     @Override

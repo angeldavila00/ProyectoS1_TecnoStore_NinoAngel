@@ -1,0 +1,15 @@
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\ar\angel\aplicaciontecnostore\AplicacionTecnoStore.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\CONTROLADOR\Conexion.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\CONTROLADOR\GestionarCelulares.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\CONTROLADOR\GestionarClientes.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\CONTROLADOR\GestionarVentas.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\MODELO\celulares.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\MODELO\clientes.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\MODELO\detalle_ventas.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\MODELO\marcas.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\MODELO\Tipogama.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\MODELO\ventas.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PATRON\DescuentoPorMonto.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PATRON\StrategyDescuento.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\VISTA\Menu.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\VISTA\Menu_general.java

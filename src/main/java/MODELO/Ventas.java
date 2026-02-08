@@ -4,21 +4,21 @@ package MODELO;
  *
  * @author ANGEL
  */
-public class ventas {
+public class Ventas {
     
     private int id;
     private String fecha_venta;
     private double total;
-    private clientes id_cliente;
+    private Clientes id_cliente;
 
-    public ventas(int id, String fecha_venta, double total, clientes id_cliente) {
+    public Ventas(int id, String fecha_venta, double total, Clientes id_cliente) {
         this.id = id;
         this.fecha_venta = fecha_venta;
         this.total = total;
         this.id_cliente = id_cliente;
     }
 
-    public ventas(){
+    public Ventas(){
         
     }
     
@@ -46,11 +46,11 @@ public class ventas {
         this.total = total;
     }
 
-    public clientes getId_cliente() {
+    public Clientes getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(clientes id_cliente) {
+    public void setId_cliente(Clientes id_cliente) {
         this.id_cliente = id_cliente;
     }
 

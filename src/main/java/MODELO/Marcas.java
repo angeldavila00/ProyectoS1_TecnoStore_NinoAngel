@@ -5,16 +5,16 @@ package MODELO;
  *
  * @author ANGEL
  */
-public class marcas {
+public class Marcas {
     private int id;
     private String nombre;
 
-    public marcas(int id, String nombre) {
+    public Marcas(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
     
-    public marcas(){
+    public Marcas(){
         
     }
 

@@ -23,7 +23,7 @@ public class ClientesDAOImlp implements ClientesDAO {
     @Override
     public void guardar(Clientes cl) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("insert into Personas(nombre,identificacion, correo, telefono ) values (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("insert into clientes(nombre,identificacion, correo, telefono ) values (?,?,?,?)");
             ps.setString(1, cl.getNombre());
             ps.setString(2, cl.getIdentificacion());
             ps.setString(3, cl.getCorreo());
@@ -37,7 +37,7 @@ public class ClientesDAOImlp implements ClientesDAO {
     @Override
     public void actualizar(Clientes cl, int id) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("update Clientes set nombre=?, identificacion=?, correo=?, telefono=? where id=?");
+            PreparedStatement ps = con.prepareStatement("update clientes set nombre=?, identificacion=?, correo=?, telefono=? where id=?");
             ps.setString(1, cl.getNombre());
             ps.setString(2, cl.getIdentificacion());
             ps.setString(3, cl.getCorreo());
@@ -73,9 +73,8 @@ public class ClientesDAOImlp implements ClientesDAO {
     public ArrayList<Clientes> listar() {
         ArrayList<Clientes> clienteList = new ArrayList<>();
         try (Connection con = cone.conectar()) {
-
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from Clientes");
+            ResultSet rs = st.executeQuery("select * from clientes");
             while (rs.next()) {
                 clienteList.add(new Clientes(
                         rs.getInt(1),

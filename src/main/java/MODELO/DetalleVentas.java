@@ -18,9 +18,7 @@ public class DetalleVentas {
         this.id_celular = id_celular;
         this.id_venta = id_venta;
     }
-    public DetalleVentas(){
-        
-    }
+
     public int getId() {
         return id;
     }
@@ -34,9 +32,6 @@ public class DetalleVentas {
     }
 
     public void setCantidad(int cantidad) {
-        if (cantidad <= 0) {
-            throw new IllegalArgumentException("Cantidad inválida");
-        }
         this.cantidad = cantidad;
     }
 
@@ -63,10 +58,10 @@ public class DetalleVentas {
     public void setId_venta(Ventas id_venta) {
         this.id_venta = id_venta;
     }
+
     
-    public void calcularSubtotal() {
-    if (id_celular == null) throw new IllegalStateException("Celular requerido");
-    this.subtotal = id_celular.getPrecio() * this.cantidad;
+    
+    
 }
 
-}
+

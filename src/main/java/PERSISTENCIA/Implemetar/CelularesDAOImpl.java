@@ -16,12 +16,14 @@ public class CelularesDAOImpl implements CelularesDAO {
     @Override
     public void guardar(Celulares celu) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("insert into celulares(stock,modelo, sistema_operativo, gama, precio ) values (?,?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("insert into celulares(stock,modelo, sistema_operativo, gama, precio, id_marca ) values (?,?,?,?,?)");
             ps.setString(1, String.valueOf(celu.getStock()));
             ps.setString(2, celu.getModelo());
             ps.setString(3, celu.getSistema_operativo());
             ps.setString(4, celu.getGama().name());
             ps.setDouble(5, celu.getPrecio());
+            ps.setInt(6, celu.getId_marca().getId());
+
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

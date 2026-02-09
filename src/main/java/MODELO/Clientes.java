@@ -1,4 +1,3 @@
-
 package MODELO;
 
 /**
@@ -8,7 +7,7 @@ package MODELO;
 public class Clientes {
 
     private int id;
-    private String nombre,  identificacion, correo,  telefono;
+    private String nombre, identificacion, correo, telefono;
 
     public Clientes(int id, String nombre, String identificacion, String correo, String telefono) {
         this.id = id;
@@ -16,6 +15,9 @@ public class Clientes {
         this.identificacion = identificacion;
         this.correo = correo;
         this.telefono = telefono;
+    }
+
+    public Clientes() {
     }
 
     public int getId() {
@@ -57,7 +59,7 @@ public class Clientes {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
     @Override
     public String toString() {
         return """
@@ -67,6 +69,6 @@ public class Clientes {
                Identificacion: %s
                Correo:         %s
                Telefono:       %s
-               """.formatted(getId(),getNombre(),getIdentificacion(),getCorreo(),getTelefono());
+               """.formatted(getId(), getNombre(), getIdentificacion(), getCorreo(), getTelefono());
     }
 }

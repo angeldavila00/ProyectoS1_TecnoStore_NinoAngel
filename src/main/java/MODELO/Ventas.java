@@ -1,27 +1,30 @@
-
 package MODELO;
+
+import java.util.List;
+
 /**
  *
  * @author ANGEL
  */
 public class Ventas {
-    
+
     private int id;
-    private String fecha_venta;
-    private double total;
+    private double subtotal_Iva;
+    private double subtotal_sin_Iva;
     private Clientes id_cliente;
+    private String fecha_venta;
 
-    public Ventas(int id, String fecha_venta, double total, Clientes id_cliente) {
+    public Ventas(int id, double subtotal_Iva, double subtotal_sin_Iva, Clientes id_cliente, String fecha_venta) {
         this.id = id;
-        this.fecha_venta = fecha_venta;
-        this.total = total;
+        this.subtotal_Iva = subtotal_Iva;
+        this.subtotal_sin_Iva = subtotal_sin_Iva;
         this.id_cliente = id_cliente;
+        this.fecha_venta = fecha_venta;
     }
 
-    public Ventas(){
-        
+    public Ventas() {
     }
-    
+
     public int getId() {
         return id;
     }
@@ -30,20 +33,20 @@ public class Ventas {
         this.id = id;
     }
 
-    public String getFecha_venta() {
-        return fecha_venta;
+    public double getSubtotal_Iva() {
+        return subtotal_Iva;
     }
 
-    public void setFecha_venta(String fecha_venta) {
-        this.fecha_venta = fecha_venta;
+    public void setSubtotal_Iva(double subtotal_Iva) {
+        this.subtotal_Iva = subtotal_Iva;
     }
 
-    public double getTotal() {
-        return total;
+    public double getSubtotal_sin_Iva() {
+        return subtotal_sin_Iva;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setSubtotal_sin_Iva(double subtotal_sin_Iva) {
+        this.subtotal_sin_Iva = subtotal_sin_Iva;
     }
 
     public Clientes getId_cliente() {
@@ -52,6 +55,14 @@ public class Ventas {
 
     public void setId_cliente(Clientes id_cliente) {
         this.id_cliente = id_cliente;
+    }
+
+    public String getFecha_venta() {
+        return fecha_venta;
+    }
+
+    public void setFecha_venta(String fecha_venta) {
+        this.fecha_venta = fecha_venta;
     }
 
 }

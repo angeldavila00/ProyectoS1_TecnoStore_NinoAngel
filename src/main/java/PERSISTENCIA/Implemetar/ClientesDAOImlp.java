@@ -1,4 +1,4 @@
-package Servicios;
+package PERSISTENCIA.Implemetar;
 
 
 import MODELO.Clientes;
@@ -28,8 +28,6 @@ public class ClientesDAOImlp implements ClientesDAO {
             ps.setString(2, cl.getIdentificacion());
             ps.setString(3, cl.getCorreo());
             ps.setString(4, cl.getTelefono());
-
-            ps.executeUpdate();
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

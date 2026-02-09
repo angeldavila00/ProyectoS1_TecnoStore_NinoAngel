@@ -19,6 +19,8 @@ public interface CelularesDAO {
     ArrayList<Celulares> listar();
 
     Celulares buscar(int id);
+    
+    boolean descontarStock(int id, int cantidad);
 
 }
     

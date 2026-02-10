@@ -8,8 +8,10 @@ import java.io.Serializable;
  * @author ANGEL
  */
 public class Celulares implements Serializable {
-    private int id , stock;
-    private String modelo, sistema_operativo;
+    private int id ;
+    private int stock;
+    private String modelo;
+    private String sistema_operativo;
     private Tipogama gama;
     private double precio;
     private Marcas id_marca;

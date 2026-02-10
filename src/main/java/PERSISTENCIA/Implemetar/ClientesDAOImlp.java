@@ -92,23 +92,29 @@ public class ClientesDAOImlp implements ClientesDAO {
     }
 
     @Override
-    public Clientes buscar(int id) {
-        Clientes c = null;
-        try (Connection con = cone.conectar()) {
+public Clientes buscar(int id) {
 
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from Clientes where id=" + id);
-            while (rs.next()) {
-                c.setId(rs.getInt(1));
-                c.setNombre(rs.getString(2));
-                c.setIdentificacion(rs.getString(3));
-                c.setCorreo(rs.getString(4));
-                c.setTelefono(rs.getString(5));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    try (Connection con = cone.conectar();
+         PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE id = ?")) {
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Clientes cl = new Clientes(); 
+            cl.setId(rs.getInt(1));
+            cl.setNombre(rs.getString(2));
+            cl.setIdentificacion(rs.getString(3));
+            cl.setCorreo(rs.getString(4));
+            cl.setTelefono(rs.getString(5));
+
+            return cl;
         }
-        return c;
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
     }
+
+    return null; 
+}
+    
 
 }

@@ -13,7 +13,7 @@ public class DescuentoPorMonto implements StrategyDescuento{
     @Override
     public double aplicar(double subtotal, List<Celulares> listaCelulares) {
         if(subtotal >= 3000000){
-            return subtotal *0.90;
+            return subtotal *0.9;
         }
         return subtotal;
     }

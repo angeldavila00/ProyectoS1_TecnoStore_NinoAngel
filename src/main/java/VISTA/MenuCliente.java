@@ -10,12 +10,14 @@ import java.util.Scanner;
  *
  * @author ANGEL
  */
+
 public class MenuCliente {
 
     private ClientesDAO clientesDAO = new ClientesDAOImlp();
+    
 
     private void guardar() {
-        Clientes cl = new Clientes();
+        
         System.out.println("\n==== REGISTRAR CLIENTE=====");
         System.out.print("Ingrese el nombre: ");
         String nombre = new Scanner(System.in).nextLine();
@@ -25,15 +27,18 @@ public class MenuCliente {
         String correo = new Scanner(System.in).nextLine();
         System.out.print("Ingrese el teléfono: ");
         String telefono = new Scanner(System.in).nextLine();
+        Clientes cl = new Clientes(0, nombre, identificacion, correo, telefono);
         clientesDAO.guardar(cl);
 
     }
 
     //Actualizar
     private void actualizar() {
-        System.out.print("Ingrese el ID del cliente a actualizar: ");
+        listar();
+        System.out.print("Ingrese el ID del cliente a actualizar: ");    
         int id = new Scanner(System.in).nextInt();
-        Clientes cl = clientesDAO.buscar(id);
+        Clientes cl = clientesDAO.buscar(id);     
+        
         System.out.println("""
         ¿Qué desea modificar?
         1. Nombre
@@ -59,22 +64,21 @@ public class MenuCliente {
             }
             case 3 -> {
                 System.out.print("Ingrese el nuevo correo: ");
-                String correo = new Scanner(System.in).nextLine();
-                cl.setCorreo(correo);
+                cl.setCorreo(new Scanner(System.in).nextLine());
             }
             case 4 -> {
                 System.out.print("Ingrese el nuevo teléfono: ");
                 cl.setTelefono(new Scanner(System.in).nextLine());
             }
-            default -> {
-                System.out.println("Opción inválida.");
-                return;
-            }
+        
         }
-
+        
         clientesDAO.actualizar(cl, id);
         System.out.println("Cliente actualizado correctamente.");
-    }
+        }
+
+        
+    
 
     //listar
     private void listar() {

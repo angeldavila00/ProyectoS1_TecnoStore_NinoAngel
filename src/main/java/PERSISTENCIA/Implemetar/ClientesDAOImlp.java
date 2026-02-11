@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,11 +20,7 @@ public class ClientesDAOImlp implements ClientesDAO {
 
     @Override
     public void guardar(Clientes cl) {
-        try (Connection con = cone.conectar()) {
-            if (con == null) {
-                System.out.println("No hay conexión a la BD. Revisa MySQL.");
-                return;
-            }
+        try (Connection con = cone.conectar()) { 
             PreparedStatement ps = con.prepareStatement("insert into clientes(nombre,identificacion, correo, telefono ) values (?,?,?,?)");
             ps.setString(1, cl.getNombre());
             ps.setString(2, cl.getIdentificacion());
@@ -82,10 +77,7 @@ public class ClientesDAOImlp implements ClientesDAO {
         ArrayList<Clientes> clienteList = new ArrayList<>();
 
         try (Connection con = cone.conectar()) {
-            if (con == null) {
-                System.out.println("No hay conexión a la BD. Revisa MySQL.");
-                return clienteList;
-            }
+            
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from clientes");
             while (rs.next()) {

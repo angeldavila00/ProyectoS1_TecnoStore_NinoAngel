@@ -24,7 +24,7 @@ public class GestionarVentas {
         System.out.println("Venta registrada");
 
     }
-
+//LISTAR
     public void listar() {
         ArrayList<Ventas> lista = ventaDAO.listar();
         if (lista.isEmpty()) {
@@ -35,10 +35,11 @@ public class GestionarVentas {
         lista.forEach(System.out::println);
     }
     
+    //BUSCAR
     public Ventas buscar(int id){
         return ventaDAO.buscar(id);
     }
-    
+    //ELIMINAR
     public void eliminar(int id){
         Ventas existe = ventaDAO.buscar(id);
         if(existe == null){

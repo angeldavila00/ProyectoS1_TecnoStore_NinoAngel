@@ -20,8 +20,8 @@ public class CelularesDAOImpl implements CelularesDAO {
     @Override
     public void guardar(Celulares celu) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("insert into celulares(modelo, sistema_operativo, gama, precio, id_marca,stock ) values (?,?,?,?,?)");
-            
+            PreparedStatement ps = con.prepareStatement("insert into celulares(modelo, sistema_operativo, gama, precio, id_marca,stock ) values (?,?,?,?,?,?)");
+
             ps.setString(1, celu.getModelo());
             ps.setString(2, celu.getSistema_operativo());
             ps.setString(3, celu.getGama().name());
@@ -57,7 +57,7 @@ public class CelularesDAOImpl implements CelularesDAO {
 
     @Override
     public void eliminar(int id) {
-try (Connection con = cone.conectar()) {
+        try (Connection con = cone.conectar()) {
             PreparedStatement ps = con.prepareStatement("delete from celulares where id=?");
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -65,7 +65,7 @@ try (Connection con = cone.conectar()) {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-           
+
     }
 
     @Override
@@ -75,11 +75,26 @@ try (Connection con = cone.conectar()) {
         try (Connection con = cone.conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select celu.id, celu.stock, celu.modelo, celu.sistema_operativo, celu.gama, celu.precio, celu.id_marca, m.nombre from celulares celu inner join marcas m on celu.id_marca = m.id");
-                    
-                    
+
             while (rs.next()) {
-                Marcas marca = new Marcas(rs.getInt(7), rs.getString(8));
-                celularesList.add(new Celulares(rs.getInt(1), 0, "", "", Tipogama.BAJA, 0, marca));
+                Marcas marca = new Marcas(
+                        rs.getInt("id_marca"),
+                        rs.getString("nombre")
+                );
+
+                Tipogama gama = Tipogama.valueOf(
+                        rs.getString("gama").toUpperCase()
+                );
+                celularesList.add(new Celulares(
+                        rs.getInt("id"),
+                        rs.getInt("stock"),
+                        rs.getString("modelo"),
+                        rs.getString("sistema_operativo"),
+                        gama,
+                        rs.getDouble("precio"),
+                        marca
+                ));
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

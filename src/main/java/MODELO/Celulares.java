@@ -96,7 +96,8 @@ public class Celulares implements Serializable {
                Nombre:      %s
                Sistema Operativo:         %s
                Gama:       %s
-               """.formatted(id,id_marca.getNombre(),sistema_operativo,gama);
+               stock:      %s
+               """.formatted(id,id_marca.getNombre(),getSistema_operativo(),getGama().name(),getStock());
     }
 
     

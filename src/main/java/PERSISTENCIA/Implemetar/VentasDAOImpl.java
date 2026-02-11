@@ -5,7 +5,6 @@ import MODELO.Ventas;
 import PERSISTENCIA.ClientesDAO;
 import PERSISTENCIA.Conexion;
 import PERSISTENCIA.VentasDAO;
-import static java.lang.System.gc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,15 +25,17 @@ public class VentasDAOImpl implements VentasDAO {
     public void guardar(Ventas v) {
         try (Connection con = cone.conectar()) {
             //Insercion a la base de datos 
-            PreparedStatement ps = con.prepareStatement("insert into ventas (fecha_venta,subtotal_iva, subtotal_sin_iva, id_cliente) VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("insert into ventas (subtotal_iva, subtotal_sin_iva, id_cliente,fecha_venta,) VALUES (?,?,?,?)");
 
-            ps.setString(1, v.getFecha_venta());
+            
 
-            ps.setDouble(3, v.getSubtotal_Iva());
+            ps.setDouble(1, v.getSubtotal_Iva());
 
             ps.setDouble(2, v.getSubtotal_sin_Iva());
 
-            ps.setInt(4, v.getId_cliente().getId());
+            ps.setInt(3, v.getId_cliente().getId());
+            
+            ps.setString(4, v.getFecha_venta());
 
             ps.executeUpdate();
 
@@ -49,14 +50,15 @@ public class VentasDAOImpl implements VentasDAO {
     @Override
     public void actualizar(Ventas v, int id) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("update ventas set fecha_venta= ? ,subtotal_iva=? , subtotal_sin_iva=?, id_cliente=? where id=?");
-            ps.setString(1, v.getFecha_venta());
-            ps.setDouble(3, v.getSubtotal_Iva());
+            PreparedStatement ps = con.prepareStatement("update ventas set  ,subtotal_iva=? , subtotal_sin_iva=?, id_cliente=? , fecha_venta= ? where id=?");
+            
+            ps.setDouble(1, v.getSubtotal_Iva());
             ps.setDouble(2, v.getSubtotal_sin_Iva());
-            ps.setInt(4, v.getId_cliente().getId());
+            ps.setInt(3, v.getId_cliente().getId());
+            ps.setString(4, v.getFecha_venta());
             ps.setInt(5, id);
             ps.executeUpdate();
-            System.out.println("ACTUALIZACION DE CLIENTE, EXITOSA!");
+            System.out.println("ACTUALIZACION DE VENTA, EXITOSA!");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -85,6 +87,7 @@ public class VentasDAOImpl implements VentasDAO {
         ClientesDAO cDao = new ClientesDAOImlp();
         ArrayList<Ventas> ventaList = new ArrayList<>();
         try (Connection con = cone.conectar()) {
+            
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from ventas");
             while (rs.next()) {

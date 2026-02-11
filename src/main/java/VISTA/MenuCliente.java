@@ -10,11 +10,9 @@ import java.util.Scanner;
  *
  * @author ANGEL
  */
-
 public class MenuCliente {
 
     private ClientesDAO clientesDAO = new ClientesDAOImlp();
-    
 
     private void guardar() {
         Clientes cl = new Clientes();
@@ -45,7 +43,7 @@ public class MenuCliente {
         """);
         System.out.print("Opción: ");
         int op = new Scanner(System.in).nextInt();
-        
+
         while (op < 1 || op > 4) {
             System.out.println("Error, opcion no valida");
             op = new Scanner(System.in).nextInt();
@@ -82,6 +80,10 @@ public class MenuCliente {
     private void listar() {
         System.out.println("\n===LISTADO DE CLIENTES ===");
         ArrayList<Clientes> clientes = clientesDAO.listar();
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes registrados.");
+            return;
+        }
         for (Clientes cl : clientes) {
             System.out.println(cl);
         }
@@ -94,7 +96,7 @@ public class MenuCliente {
 
         Clientes cl = clientesDAO.buscar(id);
         if (cl != null && cl.getId() != 0) {
-            System.out.println("\nCLIENTE ENCONTRADO:");
+            System.out.println("===CLIENTE ENCONTRADO:===");
             System.out.println("ID: " + cl.getId());
             System.out.println("Nombre: " + cl.getNombre());
             System.out.println("Identificación: " + cl.getIdentificacion());
@@ -105,13 +107,12 @@ public class MenuCliente {
         }
     }
 
-    //Eliminar
+    // Eliminar
     private void eliminar() {
         System.out.print("\nIngrese el ID del cliente a eliminar: ");
         int id = new Scanner(System.in).nextInt();
         clientesDAO.eliminar(id);
     }
-    
 
     //Menu clientes
     public void menu() {
@@ -132,30 +133,32 @@ public class MenuCliente {
 
             System.out.print("Seleccione una opción: ");
             op = new Scanner(System.in).nextInt();
-            
 
             while (op < 1 || op > 6) {
                 System.out.println("Error, opción no válida");
                 System.out.print("Seleccione una opción: ");
                 op = new Scanner(System.in).nextInt();
-                
             }
-
             switch (op) {
-                case 1 ->
+                case 1:
                     guardar();
-                case 2 ->
+                    break;
+                case 2:
                     listar();
-                case 3 ->
+                    break;
+                case 3:
                     buscar();
-                case 4 ->
+                    break;
+                case 4:
                     actualizar();
-                case 5 ->
+                    break;
+                case 5:
                     eliminar();
+                    break;
+
             }
 
         } while (op != 6);
     }
 
 }
-

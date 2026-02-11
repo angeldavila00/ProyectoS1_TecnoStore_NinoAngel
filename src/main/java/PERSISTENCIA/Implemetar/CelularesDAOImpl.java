@@ -20,13 +20,14 @@ public class CelularesDAOImpl implements CelularesDAO {
     @Override
     public void guardar(Celulares celu) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("insert into celulares(stock,modelo, sistema_operativo, gama, precio, id_marca ) values (?,?,?,?,?)");
-            ps.setString(1, String.valueOf(celu.getStock()));
-            ps.setString(2, celu.getModelo());
-            ps.setString(3, celu.getSistema_operativo());
-            ps.setString(4, celu.getGama().name());
-            ps.setDouble(5, celu.getPrecio());
-            ps.setInt(6, celu.getId_marca().getId());
+            PreparedStatement ps = con.prepareStatement("insert into celulares(modelo, sistema_operativo, gama, precio, id_marca,stock ) values (?,?,?,?,?)");
+            
+            ps.setString(1, celu.getModelo());
+            ps.setString(2, celu.getSistema_operativo());
+            ps.setString(3, celu.getGama().name());
+            ps.setDouble(4, celu.getPrecio());
+            ps.setInt(5, celu.getId_marca().getId());
+            ps.setString(6, String.valueOf(celu.getStock()));
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -37,7 +38,7 @@ public class CelularesDAOImpl implements CelularesDAO {
     @Override
     public void actualizar(Celulares celu, int id) {
         try (Connection con = cone.conectar()) {
-            PreparedStatement ps = con.prepareStatement("update celulares set Stock=?, modelo=? sistema_operativo=?, gama=?, precio=?, id_marca=? where id=?");
+            PreparedStatement ps = con.prepareStatement("update celulares set  modelo=? sistema_operativo=?, gama=?, precio=?, id_marca=?, Stock=? where id=?");
             ps.setInt(1, celu.getStock());
             ps.setString(2, celu.getModelo());
             ps.setString(3, celu.getSistema_operativo());
@@ -64,17 +65,7 @@ try (Connection con = cone.conectar()) {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+           
     }
 
     @Override

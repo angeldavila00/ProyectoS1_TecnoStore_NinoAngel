@@ -1,6 +1,5 @@
 package PERSISTENCIA.Implemetar;
 
-
 import MODELO.Clientes;
 import PERSISTENCIA.ClientesDAO;
 import PERSISTENCIA.Conexion;
@@ -23,6 +22,10 @@ public class ClientesDAOImlp implements ClientesDAO {
     @Override
     public void guardar(Clientes cl) {
         try (Connection con = cone.conectar()) {
+            if (con == null) {
+                System.out.println("No hay conexión a la BD. Revisa MySQL.");
+                return;
+            }
             PreparedStatement ps = con.prepareStatement("insert into clientes(nombre,identificacion, correo, telefono ) values (?,?,?,?)");
             ps.setString(1, cl.getNombre());
             ps.setString(2, cl.getIdentificacion());
@@ -55,14 +58,19 @@ public class ClientesDAOImlp implements ClientesDAO {
     public void eliminar(int id) {
         try (Connection con = cone.conectar()) {
 
-            PreparedStatement ps = con.prepareStatement("delete from Clientes where id=?");
+            if (con == null) {
+                System.out.println("No hay conexión a la BD. Revisa MySQL.");
+                return;
+            }
+            PreparedStatement ps = con.prepareStatement("DELETE FROM clientes WHERE id = ?");
             ps.setInt(1, id);
-            int op = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el Cliente ?", null, JOptionPane.YES_NO_OPTION);
-            if (op == 0) {
-                ps.executeUpdate();
-                System.out.println("ELIMINACION EXITOSA DEL CLIENTE!");
+
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println("CLIENTE ELIMINADO CORRECTAMENTE");
             } else {
-                System.out.println("Operacion cancelada!!!");
+                System.out.println("No existe un cliente con id = " + id);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -72,7 +80,12 @@ public class ClientesDAOImlp implements ClientesDAO {
     @Override
     public ArrayList<Clientes> listar() {
         ArrayList<Clientes> clienteList = new ArrayList<>();
+
         try (Connection con = cone.conectar()) {
+            if (con == null) {
+                System.out.println("No hay conexión a la BD. Revisa MySQL.");
+                return clienteList;
+            }
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from clientes");
             while (rs.next()) {
@@ -92,29 +105,27 @@ public class ClientesDAOImlp implements ClientesDAO {
     }
 
     @Override
-public Clientes buscar(int id) {
+    public Clientes buscar(int id) {
 
-    try (Connection con = cone.conectar();
-         PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE id = ?")) {
-        ps.setInt(1, id);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            Clientes cl = new Clientes(); 
-            cl.setId(rs.getInt(1));
-            cl.setNombre(rs.getString(2));
-            cl.setIdentificacion(rs.getString(3));
-            cl.setCorreo(rs.getString(4));
-            cl.setTelefono(rs.getString(5));
+        try (Connection con = cone.conectar(); PreparedStatement ps = con.prepareStatement("SELECT * FROM clientes WHERE id = ?")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Clientes cl = new Clientes();
+                cl.setId(rs.getInt(1));
+                cl.setNombre(rs.getString(2));
+                cl.setIdentificacion(rs.getString(3));
+                cl.setCorreo(rs.getString(4));
+                cl.setTelefono(rs.getString(5));
 
-            return cl;
+                return cl;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
 
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        return null;
     }
-
-    return null; 
-}
-    
 
 }

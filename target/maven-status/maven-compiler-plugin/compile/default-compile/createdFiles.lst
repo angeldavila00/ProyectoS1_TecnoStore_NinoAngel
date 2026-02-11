@@ -1,7 +1,9 @@
 PERSISTENCIA\Implemetar\ClientesDAOImlp.class
 PERSISTENCIA\VentasDAO.class
+PERSISTENCIA\Implemetar\MarcasDAOImpl.class
 PATRON\DescuentoPorMonto.class
 UTILIDADES\Validador.class
+VISTA\MenuCelular.class
 PERSISTENCIA\Implemetar\VentasDAOImpl.class
 MODELO\Marcas.class
 Servicios\GestionarVentas.class
@@ -11,6 +13,8 @@ Servicios\GestionarClientes.class
 UTILIDADES\funcionesApoyo.class
 VISTA\Menu.class
 PERSISTENCIA\ClientesDAO.class
+PERSISTENCIA\MarcasDAO.class
+VISTA\MenuMarca.class
 MODELO\Celulares.class
 VISTA\MenuVenta.class
 PERSISTENCIA\Conexion.class
@@ -19,6 +23,7 @@ MODELO\DetalleVentas.class
 ar\angel\aplicaciontecnostore\AplicacionTecnoStore.class
 MODELO\Clientes.class
 UTILIDADES\ArchivoUtils.class
+Servicios\GestorMarcas.class
 MODELO\Tipogama.class
 VISTA\MenuCliente.class
 PERSISTENCIA\Implemetar\CelularesDAOImpl.class

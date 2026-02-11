@@ -122,4 +122,11 @@ public class VentasDAOImpl implements VentasDAO {
         return v;
     }
 
+    @Override
+    public double calculartotal(double subtotal) {
+        double total=0;
+        total= subtotal*0.19 + subtotal;
+        return total;
+    }
+
 }

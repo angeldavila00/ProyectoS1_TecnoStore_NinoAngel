@@ -14,5 +14,6 @@ public interface VentasDAO {
         void eliminar(int id);
         ArrayList<Ventas>listar();
         Ventas buscar(int id);
+        double calculartotal(double subtotal);
     
 }

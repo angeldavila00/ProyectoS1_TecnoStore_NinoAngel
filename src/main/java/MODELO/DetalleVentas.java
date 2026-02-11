@@ -18,6 +18,10 @@ public class DetalleVentas {
         this.id_celular = id_celular;
         this.id_venta = id_venta;
     }
+    
+    public DetalleVentas(){
+        
+    }
 
     public int getId() {
         return id;

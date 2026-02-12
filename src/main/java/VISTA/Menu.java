@@ -18,18 +18,17 @@ public class Menu {
                            2.   Gestionar Clientes.
                            3.   Gestionar Marcas.
                            4.   Gestionar Celulares
-                           5.   Gestionar Venta
-                           6.   Gestionar Detalle de Venta
-                           7.   Salir.
+                           5.   Salir.
                            """);
             op = new Scanner(System.in).nextInt();
-            while (op < 1 || op > 7) {
+            while (op < 1 || op > 5) {
                 System.out.println("Error, opcion no valida");
                 op = new Scanner(System.in).nextInt();
             }
             switch (op) {
                 case 1:
-                    MenuVenta menu = new MenuVenta();
+                    MenuVenta menuventa = new MenuVenta();
+                    menuventa.menuventa();
 
                     break;
                 case 2:
@@ -44,14 +43,8 @@ public class Menu {
                     MenuCelular menucelular = new MenuCelular();
                     menucelular.menu();
                     break;
-                case 5:
-                    MenuVenta menuventa = new MenuVenta();
-                    menuventa.menuventa();
-                    break;
-                case 6:
-                    
-                    break;
+                
             }
-        } while (op != 7);
+        } while (op != 5);
     }
 }

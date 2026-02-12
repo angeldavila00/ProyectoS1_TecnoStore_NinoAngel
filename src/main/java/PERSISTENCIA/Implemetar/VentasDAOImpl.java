@@ -73,13 +73,8 @@ public class VentasDAOImpl implements VentasDAO {
 
             PreparedStatement ps = con.prepareStatement("delete from ventas where id=?");
             ps.setInt(1, id);
-            int op = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la venta ?", null, JOptionPane.YES_NO_OPTION);
-            if (op == 0) {
-                ps.executeUpdate();
-                System.out.println("ELIMINACION EXITOSA");
-            } else {
-                System.out.println("Operacion cancelada!!!");
-            }
+            ps.executeUpdate();
+            System.out.println("Eliminacion exitosa");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

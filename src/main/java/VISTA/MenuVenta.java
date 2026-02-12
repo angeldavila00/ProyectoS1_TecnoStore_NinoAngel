@@ -4,6 +4,8 @@ import MODELO.Celulares;
 import MODELO.Clientes;
 import MODELO.DetalleVentas;
 import MODELO.Ventas;
+import PATRON.DescuentoPorMonto;
+import PATRON.StrategyDescuento;
 import PERSISTENCIA.CelularesDAO;
 import PERSISTENCIA.ClientesDAO;
 import PERSISTENCIA.DetalleVentasDAO;
@@ -57,8 +59,21 @@ public class MenuVenta {
 
         double precio = celu.getPrecio();
         double subtotal = detalleDAO.calcularSubtotal(cantidad, precio);
-        double total = ventaDAO.calculartotal(subtotal);
+        
+        ArrayList<Celulares> lista = new ArrayList<>();
+        lista.add(celu);
+        
+        //creamos el desceunto de la Strategy
+        StrategyDescuento estrategia = new DescuentoPorMonto();
+        //Aplicamos el descuento
+        double subtotalconDescuento = estrategia.aplicar(subtotal, lista);
+        
+        System.out.println(estrategia.mensaje());
+        
+        double total = ventaDAO.calculartotal(subtotalconDescuento);
 
+        v.setSubtotal_Iva(subtotalconDescuento);
+        
         v.setSubtotal_Iva(total);
         v.setFecha_venta(fecha_venta);
 
@@ -69,7 +84,9 @@ public class MenuVenta {
         dv.setId_venta(v);
         dv.setId_celular(celu);
         dv.setCantidad(cantidad);
-        dv.setSubtotal(subtotal);
+        
+        
+        dv.setSubtotal(subtotalconDescuento);
 
         celularDAO.descontarStock(celu.getId(), cantidad);
         detalleDAO.guardar(dv);
@@ -236,33 +253,28 @@ public class MenuVenta {
 
         } while (op != 4);
     }
-    
+
     private void eliminar() {
-    ArrayList<DetalleVentas> ventas = detalleDAO.listar();
-    if (ventas.isEmpty()) {
-        System.out.println("No hay ventas para eliminar.");
-        return;
+        ArrayList<DetalleVentas> ventas = detalleDAO.listar();
+
+        if (ventas.isEmpty()) {
+            System.out.println("No hay ventas registradas...");
+            return;
+        }
+
+        ventas.forEach(x -> System.out.println(x));
+
+        System.out.println("Ingrese el numero de la venta a eliminar:");
+        int id = new Scanner(System.in).nextInt();
+
+        DetalleVentas dv = detalleDAO.buscar(id);
+        Ventas v = ventaDAO.buscar(id);
+
+        detalleDAO.eliminar(id);
+        ventaDAO.eliminar(id);
+
+        System.out.println("VENTA ELIMINADA CORRECTAMENTE!");
     }
-
-    ventas.forEach(x -> System.out.println(x));
-
-    System.out.println("Ingrese el numero de la venta a eliminar:");
-    int id = new Scanner(System.in).nextInt();
-
-    DetalleVentas dv = detalleDAO.buscar(id);
-    Ventas v = ventaDAO.buscar(id);
-
-    if (dv == null || v == null) {
-        System.out.println("No existe esa venta.");
-        return;
-    }
-
-    detalleDAO.eliminar(id); 
-    ventaDAO.eliminar(id);    
-
-    System.out.println("Venta eliminada correctamente: " + id);
-}
-
 
     public void menuventa() {
         int op;
@@ -298,7 +310,7 @@ public class MenuVenta {
                 case 4:
                     eliminar();
                     break;
-                
+
             }
 
         } while (op != 5);

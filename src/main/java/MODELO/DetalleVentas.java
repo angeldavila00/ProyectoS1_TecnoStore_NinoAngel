@@ -69,7 +69,7 @@ public class DetalleVentas {
         ============================
                   VENTA
         ============================
-        Venta ID  : %s
+        ID Venta : %s
         Cliente   : %s
         Fecha     : %s
         ============================

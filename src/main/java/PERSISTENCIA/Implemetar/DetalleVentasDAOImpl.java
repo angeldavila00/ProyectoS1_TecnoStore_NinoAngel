@@ -125,15 +125,7 @@ public void eliminar(int id) {
         try (Connection con = cone.conectar()) {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT dv.id, cl.nombre, v.id, v.fecha_venta, v.subtotal_Iva, "
-                    + "ce.id AS id_celular, ce.modelo, ce.sistema_operativo, ce.gama, ce.precio, ce.stock, "
-                    + "m.id AS id_marca, m.nombre, dv.cantidad, dv.subtotal "
-                    + "FROM detalle_ventas dv "
-                    + "INNER JOIN ventas v ON dv.id_venta = v.id "
-                    + "INNER JOIN clientes cl ON v.id_cliente = cl.id "
-                    + "INNER JOIN celulares ce ON dv.id_celular = ce.id "
-                    + "INNER JOIN marcas m ON ce.id_marca = m.id "
-                    + "ORDER BY v.fecha_venta DESC;"
+                    "SELECT dv.id, cl.nombre, v.id, v.fecha_venta, v.subtotal_Iva, ce.id AS id_celular, ce.modelo, ce.sistema_operativo, ce.gama, ce.precio, ce.stock, m.id AS id_marca, m.nombre, dv.cantidad, dv.subtotal FROM detalle_ventas dv INNER JOIN ventas v ON dv.id_venta = v.id INNER JOIN clientes cl ON v.id_cliente = cl.id INNER JOIN celulares ce ON dv.id_celular = ce.id INNER JOIN marcas m ON ce.id_marca = m.id ORDER BY v.fecha_venta DESC;"
             );
 
             while (rs.next()) {

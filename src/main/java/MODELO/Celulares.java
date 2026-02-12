@@ -1,13 +1,12 @@
 
 package MODELO;
 
-import java.io.Serializable;
 
 /**
  *
  * @author ANGEL
  */
-public class Celulares implements Serializable {
+public class Celulares  {
     private int id ;
     private int stock;
     private String modelo;

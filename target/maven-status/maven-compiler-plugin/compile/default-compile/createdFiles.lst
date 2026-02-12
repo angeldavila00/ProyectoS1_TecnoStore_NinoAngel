@@ -13,9 +13,11 @@ Servicios\GestionarClientes.class
 UTILIDADES\funcionesApoyo.class
 VISTA\Menu.class
 PERSISTENCIA\ClientesDAO.class
+PERSISTENCIA\DetalleVentasDAO.class
 PERSISTENCIA\MarcasDAO.class
 VISTA\MenuMarca.class
 MODELO\Celulares.class
+PERSISTENCIA\Implemetar\DetalleVentasDAOImpl.class
 VISTA\MenuVenta.class
 PERSISTENCIA\Conexion.class
 UTILIDADES\ReporteUtils.class

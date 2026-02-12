@@ -45,8 +45,11 @@ public class Menu {
                     menucelular.menu();
                     break;
                 case 5:
+                    MenuVenta menuventa = new MenuVenta();
+                    menuventa.menuventa();
                     break;
                 case 6:
+                    
                     break;
             }
         } while (op != 7);

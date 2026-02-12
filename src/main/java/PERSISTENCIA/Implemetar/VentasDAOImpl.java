@@ -22,28 +22,31 @@ public class VentasDAOImpl implements VentasDAO {
     Conexion cone = new Conexion();
 
     @Override
-    public void guardar(Ventas v) {
-        try (Connection con = cone.conectar()) {
-            //Insercion a la base de datos 
-            PreparedStatement ps = con.prepareStatement("insert into ventas (subtotal_iva, subtotal_sin_iva, id_cliente,fecha_venta,) VALUES (?,?,?,?)");
+    public int guardar(Ventas v) {
+        int idVenta = 0;
 
-            
+    try (Connection con = cone.conectar();
+         PreparedStatement ps = con.prepareStatement(
+                 "INSERT INTO ventas (subtotal_Iva, subtotal_sin_Iva, id_cliente, fecha_venta) VALUES (?,?,?,?)",
+                 Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setDouble(1, v.getSubtotal_Iva());
+        ps.setDouble(1, v.getSubtotal_Iva());
+        ps.setDouble(2, v.getSubtotal_sin_Iva());
+        ps.setInt(3, v.getId_cliente().getId());
+        ps.setString(4, v.getFecha_venta());
 
-            ps.setDouble(2, v.getSubtotal_sin_Iva());
+        ps.executeUpdate();
 
-            ps.setInt(3, v.getId_cliente().getId());
-            
-            ps.setString(4, v.getFecha_venta());
-
-            ps.executeUpdate();
-
-            ps.executeUpdate();
-            System.out.println("REGISTRO EXITOSO!");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+            idVenta = rs.getInt(1);
         }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return idVenta;
 
     }
 
@@ -102,25 +105,35 @@ public class VentasDAOImpl implements VentasDAO {
     }
 
     @Override
-    public Ventas buscar(int id) {
-        ClientesDAO cDao = new ClientesDAOImlp();
-        Ventas v = null;
-        try (Connection con = cone.conectar()) {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from ventas where id=" + id);
-            while (rs.next()) {
-                v.setId(rs.getInt(1));
-                v.setSubtotal_Iva(rs.getDouble(2));
-                v.setSubtotal_sin_Iva(rs.getDouble(3));
-                Clientes cl = cDao.buscar(4);
-                v.setFecha_venta(rs.getString(5));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+public Ventas buscar(int id) {
+
+    try (Connection con = cone.conectar();
+         PreparedStatement ps = con.prepareStatement("SELECT * FROM ventas WHERE id = ?")) {
+
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            Ventas v = new Ventas();
+            v.setId(rs.getInt("id"));
+            v.setSubtotal_Iva(rs.getDouble("subtotal_Iva"));
+            v.setSubtotal_sin_Iva(rs.getDouble("subtotal_sin_Iva"));
+            v.setFecha_venta(rs.getString("fecha_venta"));
+
+            Clientes cl = new Clientes();
+            cl.setId(rs.getInt("id_cliente"));
+            v.setId_cliente(cl);
+
+            return v;
         }
 
-        return v;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    return null;
+}
+
 
     @Override
     public double calculartotal(double subtotal) {

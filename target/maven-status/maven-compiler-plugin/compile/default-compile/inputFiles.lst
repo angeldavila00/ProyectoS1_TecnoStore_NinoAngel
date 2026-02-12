@@ -10,8 +10,10 @@ C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PATRON\StrategyDescu
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\CelularesDAO.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\ClientesDAO.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\Conexion.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\DetalleVentasDAO.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\Implemetar\CelularesDAOImpl.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\Implemetar\ClientesDAOImlp.java
+C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\Implemetar\DetalleVentasDAOImpl.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\Implemetar\MarcasDAOImpl.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\Implemetar\VentasDAOImpl.java
 C:\Users\angel\Documents\AplicacionTecnoStore\src\main\java\PERSISTENCIA\MarcasDAO.java

@@ -63,7 +63,44 @@ public class DetalleVentas {
         this.id_venta = id_venta;
     }
 
-    
+    @Override
+    public String toString() {
+        return String.format("""
+        ============================
+                  VENTA
+        ============================
+        Venta ID  : %s
+        Cliente   : %s
+        Fecha     : %s
+        ============================
+        Celular ID: %s
+        Modelo    : %s
+        Marca     : %s
+        SO        : %s
+        Gama      : %s
+        Precio    : %s
+        Stock     : %s
+        ============================
+        Cantidad  : %s
+        Subtotal  : %s
+        Total + iva: %s
+        ============================
+        """,
+                id_venta.getId(),
+                id_venta.getId_cliente().getNombre(),
+                id_venta.getFecha_venta(),
+                id_celular.getId(),
+                id_celular.getModelo(),
+                id_celular.getId_marca().getNombre(),
+                id_celular.getSistema_operativo(),
+                id_celular.getGama(),
+                id_celular.getPrecio(),
+                id_celular.getStock(),
+                cantidad,
+                subtotal,
+                id_venta.getSubtotal_Iva()
+        );
+    }
     
     
 }

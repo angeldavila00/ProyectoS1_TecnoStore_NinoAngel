@@ -3,6 +3,7 @@ package ViSTA;
 import MODELO.Clientes;
 import PERSISTENCIA.ClientesDAO;
 import PERSISTENCIA.Implemetar.ClientesDAOImlp;
+import Servicios.GestionarClientes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ public class MenuCliente {
 
     private ClientesDAO clientesDAO = new ClientesDAOImlp();
     
+    private GestionarClientes gc = new GestionarClientes();
 
     private void guardar() {
         
@@ -29,6 +31,7 @@ public class MenuCliente {
         String telefono = new Scanner(System.in).nextLine();
         Clientes cl = new Clientes(0, nombre, identificacion, correo, telefono);
         clientesDAO.guardar(cl);
+        
 
     }
 

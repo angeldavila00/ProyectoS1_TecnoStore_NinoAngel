@@ -53,7 +53,10 @@ public class MenuVenta {
         int cantidad = new Scanner(System.in).nextInt();
 
         if (celu.getStock() < cantidad) {
-            System.out.println("No tenemos stock de el dispositivo");
+            
+            System.out.println("STOCK NO DISPONIBLE!!!!!"+celularDAO.buscar(idcel));
+            
+            //stock no disponible
             return;
         }
 

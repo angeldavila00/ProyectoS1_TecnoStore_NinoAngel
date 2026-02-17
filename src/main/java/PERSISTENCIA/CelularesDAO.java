@@ -21,6 +21,8 @@ public interface CelularesDAO {
     Celulares buscar(int id);
     
     boolean descontarStock(int id, int cantidad);
+    
+    
 
 }
     

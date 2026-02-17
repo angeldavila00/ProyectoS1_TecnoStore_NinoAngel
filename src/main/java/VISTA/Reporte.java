@@ -42,7 +42,7 @@ public class Reporte {
                                2.   Regresar al Menu
                                --------------------------------------------
                                """);
-            while (op < 1 || op > 5) {
+            while (op < 1 || op > 2) {
                 System.out.println("Error opcion no valida");
                 op = new Scanner(System.in).nextInt();
             }

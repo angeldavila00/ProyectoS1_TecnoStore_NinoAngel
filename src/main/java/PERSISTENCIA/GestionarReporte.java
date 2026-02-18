@@ -1,8 +1,8 @@
-
 package PERSISTENCIA;
 
 import MODELO.Celulares;
-import MODELO.StockCelular;
+import MODELO.Marcas;
+import MODELO.Tipogama;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,50 +10,56 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author ANGEL
- */
 public class GestionarReporte {
-    Conexion cone = new Conexion();
-    
- public List<Celulares> obtenerStockMasVendidos() {
 
-        List<Celulares> top3 = new ArrayList<>();
+    private final Conexion cone = new Conexion();
 
-        try (Connection cn = cone.conectar()) {
+    public List<Celulares> obtenerStockBajo() {
+
+        List<Celulares> lista = new ArrayList<>();
+
+        try (
+            Connection cn = cone.conectar();
             PreparedStatement ps = cn.prepareStatement("""
-        SELECT 
-            m.nombre,
-            c.modelo,
-            c.gama,
-            c.precio,
-            SUM(dv.cantidad)
-        FROM celulares c
-        INNER JOIN marca m ON c.id_marca = m.id
-        INNER JOIN detalle_ventas dv ON dv.id_celular = c.id
-        GROUP BY c.id, m.nombre, c.modelo, c.gama, c.precio
-        ORDER BY unidades_vendidas DESC
-        LIMIT 3
-    """);
+                SELECT 
+                    c.id,
+                    c.stock,
+                    c.modelo,
+                    c.sistema_operativo,
+                    c.gama,
+                    c.precio,
+                    m.id AS id_marca,
+                    m.nombre AS nombre_marca
+                FROM celulares c
+                INNER JOIN marcas m ON c.id_marca = m.id
+                WHERE c.stock <= 5
+                ORDER BY c.stock ASC
+            """);
             ResultSet rs = ps.executeQuery();
+        ) {
             while (rs.next()) {
 
-                StockCelular celulares = new StockCelular(
-                        rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getInt(5)
+                Marcas marca = new Marcas();
+                marca.setId(rs.getInt("id_marca"));
+                marca.setNombre(rs.getString("nombre_marca"));
+
+                Celulares celular = new Celulares(
+                    rs.getInt("id"),
+                    rs.getInt("stock"),
+                    rs.getString("modelo"),
+                    rs.getString("sistema_operativo"),
+                    Tipogama.valueOf(rs.getString("gama").toUpperCase()),
+                    rs.getDouble("precio"),
+                    marca
                 );
 
-                
+                lista.add(celular);
             }
 
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error en obtenerStockBajo: " + e.getMessage());
         }
 
-        return top3;
+        return lista;
     }
 }

@@ -18,11 +18,10 @@ public class Menu {
                            2.   Gestionar Clientes.
                            3.   Gestionar Marcas.
                            4.   Gestionar Celulares
-                           5.   Gestionar Reporte
-                           6.   Salir.
+                           5.   Salir.
                            """);
             op = new Scanner(System.in).nextInt();
-            while (op < 1 || op > 6) {
+            while (op < 1 || op > 5) {
                 System.out.println("Error, opcion no valida");
                 op = new Scanner(System.in).nextInt();
             }
@@ -44,12 +43,8 @@ public class Menu {
                     MenuCelular menucelular = new MenuCelular();
                     menucelular.menu();
                     break;
-                    
-                case 5: 
-                    Reporte repo = new Reporte();
-                    repo.menu();
                 
             }
-        } while (op != 6);
+        } while (op != 5);
     }
 }
